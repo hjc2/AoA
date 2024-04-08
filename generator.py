@@ -38,18 +38,54 @@ def generatorList(G, m):
     print(str(F) + " is the list of primitive roots")
 
 
+def primRoots(m):
 
-def modList(m):
+
+def unitsGroup(m):
     F = set()
     for i in range(0,m):
         if(gcd(i, m) == 1):
             F.add(i)
+    return(F)
+
+
+
+
     # print(str(F))
     print("U_" + str(m) + " = " + str(F))
     print("----")
     generatorList(F, m)
 
 
-# generatorList({1, 5, 7, 11, 13, 17}, 18)
-modList(10)
+def tableGroup(m):
+    U = set()
+    for i in range(0,m):
+        if(gcd(i, m) == 1):
+            U.add(i)
 
+    print("U_" + str(m) + " = " + str(U))
+    print("----")
+    # generatorList(F, m)
+
+    T = list(U)
+    T.sort()
+
+    print('     ', end = '')
+    for k in T:
+        print("{: >3}".format(str(k)), end = '')
+    print('')
+    print('     ', end = '')
+    for k in T:
+        print("---", end = '')   
+    print('')
+    for k in T:
+        print("{: >3}".format(k) + " |", end = '')
+        for h in T:
+            print(("{: >3}".format(str(k * h % m))), end = '')
+        print('')
+
+
+
+
+primRoots(10)
+tableGroup(11)
