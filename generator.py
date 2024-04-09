@@ -18,8 +18,9 @@ def printGCD(a,b):
     print("the GCD of " + str(a) + " and " + str(b) + " is " + str(gcd(a,b)))
 
 
-def generatorList(G, m):
+def primRoots(m):
     F = set()
+    G = unitsGroup(m)
     for a in G:
         K = G.copy()
         for i in range(0,100):
@@ -35,10 +36,7 @@ def generatorList(G, m):
         else:
             print(str(a) + " does not satisfies all elements")
     print("----")
-    print(str(F) + " is the list of primitive roots")
-
-
-def primRoots(m):
+    print(str(F) + " is the list of primitive roots for " + str(m))
 
 
 def unitsGroup(m):
@@ -46,26 +44,13 @@ def unitsGroup(m):
     for i in range(0,m):
         if(gcd(i, m) == 1):
             F.add(i)
+    print("U_" + str(m) + " = " + str(F))
+    print("----")
     return(F)
 
 
-
-
-    # print(str(F))
-    print("U_" + str(m) + " = " + str(F))
-    print("----")
-    generatorList(F, m)
-
-
 def tableGroup(m):
-    U = set()
-    for i in range(0,m):
-        if(gcd(i, m) == 1):
-            U.add(i)
-
-    print("U_" + str(m) + " = " + str(U))
-    print("----")
-    # generatorList(F, m)
+    U = unitsGroup(m)
 
     T = list(U)
     T.sort()
@@ -86,6 +71,19 @@ def tableGroup(m):
 
 
 
+def sg(m):
+    U = unitsGroup(m)
 
-primRoots(10)
-tableGroup(11)
+    tmp = {x for x in U if pow(x,2) % m == 1}
+
+    print(str(tmp))
+
+
+primRoots(18)
+primRoots(17)
+
+tableGroup(27)
+
+# 7 
+sg(27)
+sg(15)
